@@ -1,6 +1,8 @@
 "use client";
 
-import { ArrowUpIcon, ArrowDownIcon, CommandIcon, FileIcon, SearchIcon, CornerDownLeftIcon } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
+import { ArrowUpIcon, ArrowDownIcon, CommandIcon, FileTextIcon, SearchIcon, CornerDownLeftIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
@@ -11,14 +13,15 @@ import {
   DialogClose,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { useEffect, useMemo, useState } from "react";
 import Anchor from "./anchor";
 import { advanceSearch, cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function Search() {
+  const router = useRouter();
   const [searchedInput, setSearchedInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -39,6 +42,41 @@ export default function Search() {
     () => advanceSearch(searchedInput.trim()),
     [searchedInput]
   );
+
+  useEffect(() => {
+    setSelectedIndex(0);
+  }, [filteredResults]);
+
+  useEffect(() => {
+    const handleNavigation = (event: KeyboardEvent) => {
+      if (!isOpen || filteredResults.length === 0) return;
+
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
+        setSelectedIndex((prev) => (prev + 1) % filteredResults.length);
+      }
+
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
+        setSelectedIndex((prev) => (prev - 1 + filteredResults.length) % filteredResults.length);
+      }
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+        const selectedItem = filteredResults[selectedIndex];
+        if (selectedItem) {
+          router.push(`/docs${selectedItem.href}`);
+          setIsOpen(false);
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleNavigation);
+
+    return () => {
+      window.removeEventListener("keydown", handleNavigation);
+    };
+  }, [isOpen, filteredResults, selectedIndex, router]);
 
   return (
     <div>
@@ -82,53 +120,54 @@ export default function Search() {
           )}
           <ScrollArea className="max-h-[400px] overflow-y-auto">
             <div className="flex flex-col items-start overflow-y-auto sm:px-2 px-1 pb-4">
-              {filteredResults.map((item) => {
-                const level = (item.href.split("/").slice(1).length -
-                  1) as keyof typeof paddingMap;
+              {filteredResults.map((item, index) => {
+                const level = (item.href.split("/").slice(1).length - 1) as keyof typeof paddingMap;
                 const paddingClass = paddingMap[level];
+                const isActive = index === selectedIndex;
 
                 return (
-                  <DialogClose key={item.href} asChild>
-                    <Anchor
-                      className={cn(
-                        "dark:hover:bg-stone-900 hover:bg-stone-100 w-full px-3 rounded-sm text-sm flex items-center gap-2.5",
-                        paddingClass
-                      )}
-                      href={`/docs${item.href}`}
-                    >
-                      <div
+                    <DialogClose key={item.href} asChild>
+                        <Anchor
                         className={cn(
-                          "flex items-center w-fit h-full py-3 gap-1.5 px-2",
-                          level > 1 && "border-l pl-4"
+                            "dark:hover:bg-accent/15 hover:bg-accent/10 w-full px-3 rounded-sm text-sm flex items-center gap-2.5",
+                            isActive && "bg-primary/20 dark:bg-primary/30",
+                            paddingClass
                         )}
-                      >
-                        <FileIcon className="h-[1.1rem] w-[1.1rem] mr-1" />{" "}
-                        {item.title}
-                      </div>
-                    </Anchor>
-                  </DialogClose>
+                        href={`/docs${item.href}`}
+                        tabIndex={0}
+                        >
+                        <div
+                            className={cn(
+                            "flex items-center w-fit h-full py-3 gap-1.5 px-2",
+                            level > 1 && "border-l pl-4"
+                            )}
+                        >
+                            <FileTextIcon className="h-[1.1rem] w-[1.1rem] mr-1" /> {item.title}
+                        </div>
+                        </Anchor>
+                    </DialogClose>
                 );
               })}
             </div>
           </ScrollArea>
           <DialogFooter className="md:flex md:justify-start hidden h-14 px-6 bg-transparent border-t text-[14px] outline-none">
-              <div className="flex items-center gap-2">
-                <span className="dark:bg-accent/15 bg-slate-200 border rounded p-2">
-                  <ArrowUpIcon className="w-3 h-3"/>
-                </span>
-                <span className="dark:bg-accent/15 bg-slate-200 border rounded p-2">
-                  <ArrowDownIcon className="w-3 h-3"/>
-                </span>
-                <p className="text-muted-foreground">to navigate</p>
-                <span className="dark:bg-accent/15 bg-slate-200 border rounded p-2">
-                  <CornerDownLeftIcon className="w-3 h-3"/>
-                </span>
-                <p className="text-muted-foreground">to select</p>
-                <span className="dark:bg-accent/15 bg-slate-200 border rounded px-2 py-1">
-                  esc
-                </span>
-                <p className="text-muted-foreground">to close</p>
-              </div>
+            <div className="flex items-center gap-2">
+              <span className="dark:bg-accent/15 bg-slate-200 border rounded p-2">
+                <ArrowUpIcon className="w-3 h-3"/>
+              </span>
+              <span className="dark:bg-accent/15 bg-slate-200 border rounded p-2">
+                <ArrowDownIcon className="w-3 h-3"/>
+              </span>
+              <p className="text-muted-foreground">to navigate</p>
+              <span className="dark:bg-accent/15 bg-slate-200 border rounded p-2">
+                <CornerDownLeftIcon className="w-3 h-3"/>
+              </span>
+              <p className="text-muted-foreground">to select</p>
+              <span className="dark:bg-accent/15 bg-slate-200 border rounded px-2 py-1">
+                esc
+              </span>
+              <p className="text-muted-foreground">to close</p>
+            </div>
           </DialogFooter>
         </DialogContent>
       </Dialog>
@@ -140,5 +179,4 @@ const paddingMap = {
   1: "pl-2",
   2: "pl-4",
   3: "pl-10",
-  // Add more levels if needed
 } as const;

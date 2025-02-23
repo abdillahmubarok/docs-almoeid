@@ -1,3 +1,22 @@
+## [1.7.0] - 2025-02-23
+
+> Remove the old function in the search dialog and replace it with a new and more optimal feature
+
+### Added
+
+- Up and down navigation : search dialog.tsx
+- Enter (return) to select : search dialog.tsx
+- Escape to close the dialog : search dialog.tsx
+
+### Improved
+
+- Maintenance for anchor components
+- Anchor.tsx adjustments for all elements that use it
+
+### Removed
+
+- Remove suboptimal search features
+
 ## [1.6.0] - 2025-02-21
 
 > New Feature Card Groups with arrays for more Flexible Content
