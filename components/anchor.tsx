@@ -14,11 +14,16 @@ type AnchorProps = ComponentProps<typeof Link> & {
 const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
   ({ absolute, className = "", activeClassName = "", disabled, children, ...props }, ref) => {
     const path = usePathname();
-    let isMatch = absolute
-      ? props.href.toString().split("/")[1] == path.split("/")[1]
-      : path === props.href;
+    const href = props.href.toString();
 
-    if (props.href.toString().includes("http")) isMatch = false;
+    // Deteksi URL eksternal menggunakan regex
+    const isExternal = /^(https?:\/\/|\/\/)/.test(href);
+
+    let isMatch = absolute
+      ? href.split("/")[1] === path.split("/")[1]
+      : path === href;
+
+    if (isExternal) isMatch = false; // Hindari mencocokkan URL eksternal
 
     if (disabled)
       return (
@@ -32,7 +37,7 @@ const Anchor = forwardRef<HTMLAnchorElement, AnchorProps>(
     );
   }
 );
-// ✅ Tambahkan display name agar tidak error saat build
+
 Anchor.displayName = "Anchor";
 
 export default Anchor;

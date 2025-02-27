@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { ArrowUpIcon, ArrowDownIcon, CommandIcon, FileTextIcon, SearchIcon, CornerDownLeftIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import {
@@ -22,6 +22,7 @@ export default function Search() {
   const [searchedInput, setSearchedInput] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -32,7 +33,6 @@ export default function Search() {
     };
 
     window.addEventListener("keydown", handleKeyDown);
-
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
@@ -72,11 +72,19 @@ export default function Search() {
     };
 
     window.addEventListener("keydown", handleNavigation);
-
     return () => {
       window.removeEventListener("keydown", handleNavigation);
     };
   }, [isOpen, filteredResults, selectedIndex, router]);
+
+    useEffect(() => {
+    if (itemRefs.current[selectedIndex]) {
+      itemRefs.current[selectedIndex]?.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+    }
+  }, [selectedIndex]);
 
   return (
     <div>
@@ -92,7 +100,7 @@ export default function Search() {
             <SearchIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-stone-500 dark:text-stone-400" />
             <Input
               className="md:w-full rounded-md dark:bg-background/95 bg-background border h-9 pl-10 pr-0 sm:pr-4 text-sm shadow-sm overflow-ellipsis"
-              placeholder="Search documentation..."
+              placeholder="Search"
               type="search"
             />
             <div className="sm:flex hidden absolute top-1/2 -translate-y-1/2 right-2 text-xs font-medium font-mono items-center gap-0.5 dark:bg-black dark:border dark:border-white/20 bg-stone-200/50 border border-black/40 p-1 rounded-sm">
@@ -128,6 +136,9 @@ export default function Search() {
                 return (
                     <DialogClose key={item.href} asChild>
                         <Anchor
+                        ref={(el) => {
+                            itemRefs.current[index] = el as HTMLDivElement | null;
+                          }}
                         className={cn(
                             "dark:hover:bg-accent/15 hover:bg-accent/10 w-full px-3 rounded-sm text-sm flex items-center gap-2.5",
                             isActive && "bg-primary/20 dark:bg-primary/30",
