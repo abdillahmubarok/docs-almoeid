@@ -7,16 +7,16 @@ export function Footer() {
   const { footer } = docuConfig;
   const { meta } = docuConfig;
   return (
-    <footer className="w-full py-8 border-t bg-background">
+    <footer className="w-full py-4 border-t lg:py-8 bg-background">
       <div className="container flex flex-wrap items-center justify-between text-sm">
-        <div className="items-start justify-center hidden gap-4 lg:flex-col lg:flex">
+        <div className="items-start justify-center hidden gap-4 lg:flex-col lg:flex lg:w-3/5">
             <h3 className="text-lg font-bold font-code">{meta.title}</h3>
             <span className="w-3/4 text-base text-wrap text-muted-foreground">{meta.description}</span>
             <div className="flex items-center gap-6 mt-2">
                 <FooterButtons />
             </div>
         </div>
-        <div className="flex flex-col items-start justify-center gap-4 mt-4 xl:items-end">
+        <div className="flex flex-col items-start justify-center w-full gap-4 mt-4 xl:items-end lg:w-2/5">
             <p className="text-center text-muted-foreground">
                 Copyright © {new Date().getFullYear()} {footer.copyright} - Made with{" "}
                 <Link href="https://www.docubook.pro" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
