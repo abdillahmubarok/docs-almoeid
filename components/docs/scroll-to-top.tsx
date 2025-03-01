@@ -2,7 +2,7 @@
 
 import { ArrowUpIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
 export function ScrollToTop() {

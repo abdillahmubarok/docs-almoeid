@@ -6,12 +6,13 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Logo, NavMenu } from "./navbar";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { AlignLeftIcon } from "lucide-react";
 import { FooterButtons } from "./footer";
-import { DialogTitle } from "./ui/dialog";
+import { DialogTitle } from "../ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import DocsMenu from "./docs-menu";
+import { ModeToggle } from "./theme-toggle";
 
 export function Leftbar() {
   return (
@@ -47,6 +48,9 @@ export function SheetLeftbar() {
           </div>
           <div className="p-6 pb-4 flex gap-2.5">
             <FooterButtons />
+          </div>
+          <div className="flex w-2/4 px-5">
+            <ModeToggle />
           </div>
         </div>
       </SheetContent>

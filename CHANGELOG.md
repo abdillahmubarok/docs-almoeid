@@ -1,3 +1,26 @@
+## [1.8.0] - 2025-03-01
+
+> Now looks more modern and clean which is a big change in layout and design
+
+### Added
+
+- Social footer
+- Toggle group
+- Site description {meta.description} in footer
+- Site title {meta.title} in footer
+
+### Improved
+
+- Header design changes
+- Footer design changes
+- New functions in theme provider
+- Object changes in docu.json
+
+### Fixed
+
+- Updates to path structure components
+- Groups to organize components
+
 ## [1.7.0] - 2025-02-23
 
 > Remove the old function in the search dialog and replace it with a new and more optimal feature

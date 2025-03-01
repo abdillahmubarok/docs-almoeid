@@ -1,14 +1,14 @@
 import { notFound } from "next/navigation";
 import { getDocsForSlug, getDocsTocs } from "@/lib/markdown";
-import DocsBreadcrumb from "@/components/docs-breadcrumb";
-import Pagination from "@/components/pagination";
-import Toc from "@/components/toc";
-import { Typography } from "@/components/typography";
-import EditThisPage from "@/components/edit-on-github";
+import DocsBreadcrumb from "@/components/docs/docs-breadcrumb";
+import Pagination from "@/components/docs/pagination";
+import Toc from "@/components/docs/toc";
+import { Typography } from "@/components/docs/typography";
+import EditThisPage from "@/components/docs/edit-on-github";
 import { formatDate2 } from "@/lib/utils";
 import docuConfig from "@/docu.json";
-import MobToc from "@/components/mob-toc";
-import { ScrollToTop } from "@/components/scroll-to-top";
+import MobToc from "@/components/docs/mob-toc";
+import { ScrollToTop } from "@/components/docs/scroll-to-top";
 
 const { meta } = docuConfig;
 
