@@ -18,7 +18,7 @@ export function Footer() {
         </div>
         <div className="flex flex-col items-start justify-center gap-4 mt-4 xl:items-end">
             <p className="text-center text-muted-foreground">
-                Copyright © {new Date().getFullYear()} {footer.copyright} - Crafted with love using{" "}
+                Copyright © {new Date().getFullYear()} {footer.copyright} - Made with{" "}
                 <Link href="https://www.docubook.pro" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
                 DocuBook
                 </Link>
