@@ -7,7 +7,7 @@ export function Footer() {
   const { footer } = docuConfig;
   const { meta } = docuConfig;
   return (
-    <footer className="w-full py-4 border-t lg:py-8 bg-background">
+    <footer className="sm:container w-full py-4 border-t lg:py-8 bg-background">
       <div className="container flex flex-wrap items-center justify-between text-sm">
         <div className="items-start justify-center hidden gap-4 lg:flex-col lg:flex lg:w-3/5">
             <h3 className="text-lg font-bold font-code">{meta.title}</h3>
