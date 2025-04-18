@@ -18,10 +18,7 @@ export function Footer() {
         </div>
         <div className="flex flex-col items-start justify-center w-full gap-4 mt-4 xl:items-end lg:w-2/5">
             <p className="text-center text-muted-foreground">
-                Copyright © {new Date().getFullYear()} {footer.copyright} - Made with{" "}
-                <Link href="https://www.docubook.pro" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2">
-                DocuBook
-                </Link>
+                Copyright © {new Date().getFullYear()} {footer.copyright} - <MadeWith />
             </p>
             <div className="hidden lg:flex">
                 <ModeToggle />
@@ -51,6 +48,18 @@ export function FooterButtons() {
           </Link>
         );
       })}
+    </>
+  );
+}
+
+export function MadeWith() {
+  return (
+    <>
+      <span className="text-muted-foreground">Made with </span>
+      <span className="text-primary">
+        <Link href="https://www.docubook.pro" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 text-muted-foreground">
+            DocuBook
+        </Link></span>
     </>
   );
 }
