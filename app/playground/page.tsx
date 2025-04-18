@@ -29,7 +29,8 @@ import {
   Laptop2,
   Copy,
   Download,
-  RotateCcw
+  RotateCcw,
+  Calendar
 } from "lucide-react";
 import { Button as UIButton } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -38,8 +39,23 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import {
+    handleParagraphClick,
+    handleHeading2Click,
+    handleHeading3Click,
+    handleBulletListClick,
+    handleNumberedListClick,
+    handleLinkClick,
+    handleImageClick,
+    handleBlockquoteClick,
+    handleCodeBlockClick,
+    handleTableClick,
+    handleNoteClick,
+    handleComponentClick,
+    handleMetadataClick,
+  } from "@/components/playground/MarkComponent";
+
 import "@/styles/editor.css";
 
 const ToolbarButton = ({ icon: Icon, label, onClick }: { icon: any, label: string, onClick?: () => void }) => (
@@ -167,9 +183,7 @@ export default function PlaygroundPage() {
             </UIButton>
           </div>
         </div>
-      ), {
-        duration: 10000,
-      });
+      ), { duration: 10000 });
     }
   };
 
@@ -179,149 +193,17 @@ export default function PlaygroundPage() {
     const before = markdown.substring(0, start);
     const after = markdown.substring(end);
 
-    const newText = before + text + after;
+    // Menambahkan satu baris kosong sebelum dan sesudah komponen
+    const newText = `${before}${text}\n${after}`;
     setMarkdown(newText);
 
     requestAnimationFrame(() => {
       textArea.focus();
-      const newPosition = start + text.length;
+      const newPosition = start + text.length + 1;
       textArea.setSelectionRange(newPosition, newPosition);
     });
   };
 
-  const handleParagraphClick = () => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      insertAtCursor(textArea, 'this is regular text, **bold text**, *italic text*\n');
-    }
-  };
-
-  const handleHeading2Click = () => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      insertAtCursor(textArea, '## Heading 2\n');
-    }
-  };
-
-  const handleHeading3Click = () => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      insertAtCursor(textArea, '### Heading 3\n');
-    }
-  };
-
-  const handleBulletListClick = () => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      insertAtCursor(textArea, '- List One\n- List Two\n- Other List\n');
-    }
-  };
-
-  const handleNumberedListClick = () => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      insertAtCursor(textArea, '1. Number One\n2. Number Two\n3. Number Three\n');
-    }
-  };
-
-  const handleLinkClick = () => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      insertAtCursor(textArea, '[Visit OpenAI](https://www.openai.com)\n');
-    }
-  };
-
-  const handleImageClick = () => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      insertAtCursor(textArea, '![Alt text for the image](https://via.placeholder.com/150)\n');
-    }
-  };
-
-  const handleBlockquoteClick = () => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      insertAtCursor(textArea, '> The overriding design goal for Markdown\'s formatting syntax is to make it as readable as possible.\n');
-    }
-  };
-
-  const handleCodeBlockClick = () => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      insertAtCursor(textArea, '```javascript:main.js showLineNumbers {3-4}\nfunction isRocketAboutToCrash() {\n    // Check if the rocket is stable\n    if (!isStable()) {\n        NoCrash(); // Prevent the crash\n    }\n}\n```\n');
-    }
-  };
-
-  const handleTableClick = () => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      insertAtCursor(textArea, `| **Feature**                     | **Description**                                       |
-| ------------------------------- | ----------------------------------------------------- |
-| MDX Support                     | Write interactive documentation with MDX.             |
-| Nested Pages                    | Organize content in a nested, hierarchical structure. |
-| Blog Section                    | Include a dedicated blog section.                     |
-| Pagination                      | Split content across multiple pages.                  |
-
-`);
-    }
-  };
-
-  const handleNoteClick = (type: string) => {
-    const textArea = document.querySelector('textarea');
-    if (textArea) {
-      const noteTemplate = `<Note type="${type}" title="${type.charAt(0).toUpperCase() + type.slice(1)}">\n  This is a ${type} message.\n</Note>\n`;
-      insertAtCursor(textArea, noteTemplate);
-    }
-  };
-
-  const handleComponentClick = (component: string) => {
-    const textArea = document.querySelector('textarea');
-    if (!textArea) return;
-
-    const templates: { [key: string]: string } = {
-      stepper: `<Stepper>
-  <StepperItem title="Step 1">
-    Content for step 1
-  </StepperItem>
-  <StepperItem title="Step 2">
-    Content for step 2
-  </StepperItem>
-</Stepper>\n`,
-      card: `<Card title="Click on me" icon="Link" href="/docs/getting-started/components/button">
-    This is how you use a card with an icon and a link. Clicking on this card
-    brings you to the Card Group page.
-</Card>\n`,
-      button: `<Button
-  text="Click Me"
-  href="#"
-  icon="ArrowRight"
-  size="md"
-  variation="primary"
-/>\n`,
-      accordion: `<Accordion title="Markdown">
-    this is an example of plain text content from the accordion component and below is markdown ;
-    1. number one
-    2. number two
-    3. number three
-</Accordion>\n`,
-      youtube: `<Youtube videoId="your-video-id" />\n`,
-      tooltip: `What do you know about <Tooltip text="DocuBook" tip="npx @docubook/create@latest" /> ? Create interactive nested documentations using MDX.\n`,
-      tabs: `<Tabs defaultValue="tab1" className="pt-5 pb-1">
-  <TabsList>
-    <TabsTrigger value="tab1">Tab 1</TabsTrigger>
-    <TabsTrigger value="tab2">Tab 2</TabsTrigger>
-  </TabsList>
-  <TabsContent value="tab1">
-    Content for tab 1
-  </TabsContent>
-  <TabsContent value="tab2">
-    Content for tab 2
-  </TabsContent>
-</Tabs>\n`
-    };
-
-    insertAtCursor(textArea, templates[component]);
-  };
 
   if (isMobile) {
     return <MobileMessage />;
@@ -402,86 +284,88 @@ export default function PlaygroundPage() {
                 </UIButton>
               </div>
               <div className="flex items-center border-b p-1 bg-background">
-                <ToolbarButton icon={Type} label="Paragraph" onClick={handleParagraphClick} />
-                <ToolbarButton icon={Heading2} label="Heading 2" onClick={handleHeading2Click} />
-                <ToolbarButton icon={Heading3} label="Heading 3" onClick={handleHeading3Click} />
-                <ToolbarButton icon={List} label="Bullet List" onClick={handleBulletListClick} />
-                <ToolbarButton icon={ListOrdered} label="Numbered List" onClick={handleNumberedListClick} />
+                <ToolbarButton icon={Calendar} label="Metadata" onClick={() => handleMetadataClick(insertAtCursor)} />
                 <ToolbarSeparator />
-                <ToolbarButton icon={Code} label="Code Block" onClick={handleCodeBlockClick} />
-                <ToolbarButton icon={Quote} label="Blockquote" onClick={handleBlockquoteClick} />
-                <ToolbarButton icon={ImageIcon} label="Image" onClick={handleImageClick} />
-                <ToolbarButton icon={LinkIcon} label="Link" onClick={handleLinkClick} />
-                <ToolbarButton icon={Table} label="Table" onClick={handleTableClick} />
+                <ToolbarButton icon={Type} label="Paragraph" onClick={() => handleParagraphClick(insertAtCursor)} />
+                <ToolbarButton icon={Heading2} label="Heading 2" onClick={() => handleHeading2Click(insertAtCursor)} />
+                <ToolbarButton icon={Heading3} label="Heading 3" onClick={() => handleHeading3Click(insertAtCursor)} />
+                <ToolbarButton icon={List} label="Bullet List" onClick={() => handleBulletListClick(insertAtCursor)} />
+                <ToolbarButton icon={ListOrdered} label="Numbered List" onClick={() => handleNumberedListClick(insertAtCursor)} />
+                <ToolbarSeparator />
+                <ToolbarButton icon={LinkIcon} label="Link" onClick={() => handleLinkClick(insertAtCursor)} />
+                <ToolbarButton icon={ImageIcon} label="Image" onClick={() => handleImageClick(insertAtCursor)} />
+                <ToolbarButton icon={Quote} label="Blockquote" onClick={() => handleBlockquoteClick(insertAtCursor)} />
+                <ToolbarButton icon={Code} label="Code Block" onClick={() => handleCodeBlockClick(insertAtCursor)} />
+                <ToolbarButton icon={Table} label="Table" onClick={() => handleTableClick(insertAtCursor)} />
                 <ToolbarSeparator />
                 <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger asChild>
                     <UIButton
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 px-2 flex items-center gap-1 font-normal"
+                    variant="ghost"
+                    size="sm"
+                    className="h-8 px-2 flex items-center gap-1 font-normal"
                     >
-                      <Notebook className="h-4 w-4 text-muted-foreground" />
-                      <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                    <Notebook className="h-4 w-4" />
+                    <ChevronDown className="h-4 w-4" />
                     </UIButton>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start">
-                    <DropdownMenuItem onClick={() => handleNoteClick('note')}>
-                      Note
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                    <DropdownMenuItem onClick={handleNoteClick(insertAtCursor, 'note')}>
+                        Note
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleNoteClick('danger')}>
-                      Danger
+                    <DropdownMenuItem onClick={handleNoteClick(insertAtCursor, 'danger')}>
+                        Danger
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleNoteClick('warning')}>
-                      Warning
+                    <DropdownMenuItem onClick={handleNoteClick(insertAtCursor, 'warning')}>
+                        Warning
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleNoteClick('success')}>
-                      Success
+                    <DropdownMenuItem onClick={handleNoteClick(insertAtCursor, 'success')}>
+                        Success
                     </DropdownMenuItem>
-                  </DropdownMenuContent>
+                </DropdownMenuContent>
                 </DropdownMenu>
                 <ToolbarSeparator />
                 <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
+                <DropdownMenuTrigger asChild>
                     <UIButton
-                      variant="ghost"
-                      size="sm"
-                      className="h-8 px-2 flex items-center gap-1 font-normal"
+                    variant="ghost"
+                    size="sm"
+                    className="h-8 px-2 flex items-center gap-1 font-normal"
                     >
-                      <Component className="h-4 w-4 text-muted-foreground" />
-                      <ChevronDown className="h-4 w-4 text-muted-foreground" />
+                    <Component className="h-4 w-4" />
+                    <ChevronDown className="h-4 w-4" />
                     </UIButton>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start">
-                    <DropdownMenuItem onClick={() => handleComponentClick('stepper')}>
-                      <Rows className="h-4 w-4 mr-2" />
-                      Stepper
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start">
+                    <DropdownMenuItem onClick={handleComponentClick(insertAtCursor, 'stepper')}>
+                    <Rows className="h-4 w-4 mr-2" />
+                        Stepper
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleComponentClick('card')}>
-                      <LayoutGrid className="h-4 w-4 mr-2" />
-                      Card
+                    <DropdownMenuItem onClick={handleComponentClick(insertAtCursor, 'card')}>
+                    <LayoutGrid className="h-4 w-4 mr-2" />
+                        Card
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleComponentClick('button')}>
-                      <MousePointer2 className="h-4 w-4 mr-2" />
-                      Button
+                    <DropdownMenuItem onClick={handleComponentClick(insertAtCursor, 'button')}>
+                    <MousePointer2 className="h-4 w-4 mr-2" />
+                        Button
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleComponentClick('accordion')}>
-                      <ChevronDown className="h-4 w-4 mr-2" />
-                      Accordion
+                    <DropdownMenuItem onClick={handleComponentClick(insertAtCursor, 'accordion')}>
+                    <ChevronDown className="h-4 w-4 mr-2" />
+                    Accordion
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleComponentClick('tabs')}>
-                      <LayoutPanelTop className="h-4 w-4 mr-2" />
-                      Tabs
+                    <DropdownMenuItem onClick={handleComponentClick(insertAtCursor, 'tabs')}>
+                    <LayoutPanelTop className="h-4 w-4 mr-2" />
+                        Tabs
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleComponentClick('youtube')}>
-                      <YoutubeIcon className="h-4 w-4 mr-2" />
-                      Youtube
+                    <DropdownMenuItem onClick={handleComponentClick(insertAtCursor, 'youtube')}>
+                    <YoutubeIcon className="h-4 w-4 mr-2" />
+                        Youtube
                     </DropdownMenuItem>
-                    <DropdownMenuItem onClick={() => handleComponentClick('tooltip')}>
-                      <HelpCircle className="h-4 w-4 mr-2" />
-                      Tooltip
+                    <DropdownMenuItem onClick={handleComponentClick(insertAtCursor, 'tooltip')}>
+                    <HelpCircle className="h-4 w-4 mr-2" />
+                        Tooltip
                     </DropdownMenuItem>
-                  </DropdownMenuContent>
+                </DropdownMenuContent>
                 </DropdownMenu>
               </div>
             </div>
@@ -494,13 +378,13 @@ export default function PlaygroundPage() {
                 </div>
               </div>
               <textarea
-                ref={editorRef}
-                value={markdown}
-                onChange={(e) => setMarkdown(e.target.value)}
-                className="editor-textarea"
-                spellCheck={false}
-                placeholder="Start writing markdown..."
-              />
+                    ref={editorRef}
+                    value={markdown}
+                    onChange={(e) => setMarkdown(e.target.value)}
+                    className="editor-textarea"
+                    spellCheck={false}
+                    placeholder="Type '/' for commands..."
+                    />
             </div>
           </ScrollArea>
         </div>

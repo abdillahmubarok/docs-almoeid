@@ -1,9 +1,9 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import Search from "./search";
-import Anchor from "./anchor";
-import { SheetLeftbar } from "./leftbar";
+import Search from "@/components/search";
+import Anchor from "@/components/anchor";
+import { SheetLeftbar } from "@/components/leftbar";
 import { SheetClose } from "@/components/ui/sheet";
 import docuConfig from "@/docu.json"; // Import JSON
 

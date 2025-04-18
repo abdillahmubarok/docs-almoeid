@@ -6,79 +6,152 @@ date: 29-11-2024
 
 Follow these simple instructions to set up your project efficiently and begin creating content without delay!:
 
-## Documentation
+## Homepage
 
-1. **Configure Routing**
+to change the homepage you can open the app folder.
 
-   - Open the `@lib/route-config.ts` file and add your routing pages:
-     ```typescript
-     export const ROUTES: EachRoute[] = [
-       // Add new route below
-       {
-         title: "Fundamentals",
-         href: "/fundamentals",
-         noLink: true, // Set to true to prevent routing
-         items: [
-           // All the sub-sections under `fundamentals`
-           { title: "HTTP Server", href: "/http-server" },
-         ],
-       },
-     ];
-     ```
+<Stepper>
+  <StepperItem title="Step 1: App">
+    Open app folder.
+  </StepperItem>
+  <StepperItem title="Step 2: Page.tsx">
+    Edit page.tsx file for home content.
+  </StepperItem>
+</Stepper>
 
-2. **Create Content Structure**
+## Docu.json
+Change logo, menu, routes and footer directly in docu.json
 
-   - Navigate to the `@content/docs` directory and create a folder named `fundamentals`, as defined in the `route-config` file. Within this folder, create a subfolder named `http-server`, and inside that, create an `index.mdx` file that will render when you navigate to `/fundamentals/http-server`:
-     ```plaintext
-     root
-     ├── content/docs
-     │   └── fundamentals
-     │       └── http-server
-     │           └── index.mdx
-     ```
+<Accordion title="default code">
+```json:docu.json
+{
+    "navbar": {
+      "logo": {
+        "src": "/images/docu.svg",
+        "alt": "DocuBook Logo"
+      },
+      "logoText": "DocuBook",
+      "menu": [
+        { "title": "Docs", "href": "/docs/getting-started/introduction" },
+        { "title": "Changelog", "href": "/changelog" },
+        { "title": "Blog", "href": "/blog" },
+        { "title": "Playground", "href": "/playground" }
+      ]
+    },
+    "footer": {
+      "copyright": "DocuBook",
+      "social": [
+        {
+            "name": "Gitlab",
+            "url": "https://gitlab.com/mywildancloud/docubook",
+            "iconName": "GitlabIcon"
+        },
+        {
+            "name": "Instagram",
+            "url": "https://www.instagram.com/wildan.nrs/",
+            "iconName": "InstagramIcon"
+        },
+        {
+            "name": "Facebook",
+            "url": "https://www.facebook.com/wildan.nrsh",
+            "iconName": "FacebookIcon"
+        },
+        {
+            "name": "Twitter",
+            "url": "https://x.com/wildan_nrss",
+            "iconName": "TwitterIcon"
+        },
+        {
+            "name": "Youtube",
+            "url": "https://www.youtube.com/@wildan.nrs_",
+            "iconName": "YoutubeIcon"
+        }
+      ]
+    },
+    "meta": {
+      "baseURL": "https://docubook.pro",
+      "title": "DocuBook",
+      "description": "DocuBook is a modern documentation platform for building, deploying, and managing your docs with ease.",
+      "favicon": "/favicon.ico"
+    },
+    "repository": {
+      "url": "https://gitlab.com/mywildancloud/docubook",
+      "editPathTemplate": "/blob/main/{filePath}"
+    },
+    "routes": [
+    {
+      "title": "Getting Started",
+      "href": "/getting-started",
+      "noLink": true,
+      "items": [
+        { "title": "Introduction", "href": "/introduction" },
+        { "title": "Installation", "href": "/installation" },
+        { "title": "Quick Start Guide", "href": "/quick-start-guide" },
+        { "title": "Project Structure", "href": "/project-structure" },
+        {
+          "title": "Components",
+          "href": "/components",
+          "items": [
+            { "title": "Stepper", "href": "/stepper" },
+            { "title": "Tabs", "href": "/tabs" },
+            { "title": "Note", "href": "/note" },
+            { "title": "Code Block", "href": "/code-block" },
+            { "title": "Image", "href": "/image" },
+            { "title": "Link", "href": "/link" },
+            { "title": "Youtube", "href": "/youtube" },
+            { "title": "Tooltips", "href": "/tooltips" },
+            { "title": "Cards", "href": "/card" },
+            { "title": "Card Group", "href": "/card-group" },
+            { "title": "Button", "href": "/button" },
+            { "title": "Accordion", "href": "/accordion" },
+            { "title": "Release Note", "href": "/release-note" },
+            { "title": "Custom", "href": "/custom" }
+          ]
+        },
+        { "title": "Customize", "href": "/customize" }
+      ]
+    }
+  ]
+}
+```
+</Accordion>
 
-3. **Write Your Markdown Content**
+## Change Logo & Favicon
 
-   - Start writing your markdown content inside the `index.mdx` file. Be sure to include frontmatter at the beginning of the file, which is used for the page title and description:
+Save your logo, give it the name docu.svg then for the favicon, save your logo, give it the name favicon.ico
 
-     ```markdown showLineNumbers {1-4}
-     ---
-     title: HTTP Server
-     description: This section is about HTTP Server.
-     ---
+<Stepper>
+  <StepperItem title="Step 1: Public">
+    Open `public` folder then upload your logo save as **favicon.ico**
+  </StepperItem>
+  <StepperItem title="Step 2: Public/images">
+    Open `public` folder --> `images` then upload your logo and save as **docu.svg**
+  </StepperItem>
+</Stepper>
 
-     <!-- Here goes your markdown content -->
-     ```
+## Contents
 
-4. **Run Your Application**
-   - Ensure your application is running. Navigate to `http://localhost:3000/docs/fundamentals/http-server` to view your content. You should also see it in the left panel, allowing you to navigate to other pages.
+Open **contents/docs/getting-started** folder add new folder to add content.
 
-## Blogs
-
-To get started with blogs, follow these steps:
-
-- Navigate to the `@content/blogs` directory and create a file with a unique name prefixed with `.mdx`, then start writing the markdown content inside.
-
-- Make sure to add the following frontmatter to format data for the blogs properly:
-
-  ```markdown
-  ---
-  title: "Building a Recursive File System with React: A Deep Dive"
-  description: "Explore how to create a recursive file system in React. This blog post provides a comprehensive guide on building a file system where folders and files can be nested, added, renamed, and deleted."
-  date: 02-09-2024
-  authors:
-    - avatar: "https://ui.shadcn.com/avatars/02.png"
-      handle: nisabmohd
-      username: Nisab Mohd
-      handleUrl: "https://github.com/nisabmohd"
-  cover: "https://img.freepik.com/premium-vector/many-monsters-various-colors-doodle-come-bless-birthday-happy_577083-84.jpg?w=826"
-  ---
-
-  <!-- Your blog markdown content -->
-  ```
-
-- Navigate to your local development server at `http://localhost:3000/blog`, where you will see your blog listed and sorted based on date. You can navigate to any blog to read it.
-
-## Explore Further
-
-This section serves as your starting point for exploring the application. By following the steps above, you can quickly and easily set up your content. For more customization and control, please refer to the following pages.
+<Stepper>
+  <StepperItem title="Step 1: Add new Folder">
+    for example adding a folder for routes `how-to-install-myplugin`
+  </StepperItem>
+  <StepperItem title="Step 2: Add new File">
+    add `index.mdx` file in that folder
+  </StepperItem>
+  <StepperItem title="Step 3: Writing the Content">
+    To write content, you must first add metadata to the first line.
+    ````plaintext
+    ---
+    title : Title
+    description : Description
+    date : 10-12-2024
+    ---
+    <--- this is where you write the content --->
+    ````
+    <Note type="warning" title="Warning">
+      To write markdown content you can use all the [Components](/docs/getting-started/components)
+    </Note>
+  </StepperItem>
+</Stepper>
