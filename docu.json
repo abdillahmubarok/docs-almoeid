@@ -9,7 +9,7 @@
         { "title": "Docs", "href": "/docs/getting-started/introduction" },
         { "title": "Changelog", "href": "/changelog" },
         { "title": "Blog", "href": "/blog" },
-        { "title": "Playground", "href": "/playground" }
+        { "title": "Hire Me", "href": "/hire-me" }
       ]
     },
     "footer": {
@@ -39,11 +39,6 @@
             "name": "Youtube",
             "url": "https://www.youtube.com/@wildan.nrs_",
             "iconName": "YoutubeIcon"
-        },
-        {
-            "name": "Hire",
-            "url": "/hire-me",
-            "iconName": "HeartHandshakeIcon"
         }
       ]
     },

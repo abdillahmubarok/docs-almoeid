@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/contexts/theme-provider";
-import { Navbar } from "@/components/docs/navbar";
+import { Navbar } from "@/components/navbar";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Footer } from "@/components/docs/footer";
+import { Footer } from "@/components/footer";
 import docuConfig from "@/docu.json";
 import { Toaster } from "@/components/ui/sonner";
 import "@/styles/globals.css";

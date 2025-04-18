@@ -1,4 +1,4 @@
-import { Typography } from "@/components/docs/typography";
+import { Typography } from "@/components/typography";
 import { buttonVariants } from "@/components/ui/button";
 import { Author, getAllBlogStaticPaths, getBlogForSlug } from "@/lib/markdown";
 import { ArrowLeftIcon } from "lucide-react";
@@ -6,7 +6,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { formatDate } from "@/lib/utils";
-import { ScrollToTop } from "@/components/docs/scroll-to-top";
+import { ScrollToTop } from "@/components/scroll-to-top";
 
 type PageProps = {
   params: { slug: string };

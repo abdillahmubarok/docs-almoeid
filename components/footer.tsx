@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ModeToggle } from "@/components/docs/theme-toggle";
+import { ModeToggle } from "@/components/theme-toggle";
 import docuConfig from "@/docu.json";
 import * as LucideIcons from "lucide-react"; // Import all icons
 
