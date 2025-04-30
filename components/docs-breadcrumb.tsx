@@ -17,7 +17,7 @@ export default function DocsBreadcrumb({ paths }: { paths: string[] }) {
             <BreadcrumbLink>Docs</BreadcrumbLink>
           </BreadcrumbItem>
           {paths.map((path, index) => (
-            <Fragment key={path}>
+            <Fragment key={`${path}-${index}`}>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
                 {index < paths.length - 1 ? (

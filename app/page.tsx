@@ -13,7 +13,7 @@ export const metadata = getMetadata({
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h:[100vh] items-center justify-center text-center px-4 sm:py-40 py-12">
+    <div className="flex flex-col items-center justify-center px-2 py-8 text-center sm:py-36">
       <Link
         href="/changelog"
         className="mb-5 sm:text-lg flex items-center gap-2 underline underline-offset-4 sm:-mt-12"
@@ -31,13 +31,15 @@ export default function Home() {
           </div>
         </div>
       </Link>
-      <h1 className="text-2xl font-bold mb-6 sm:text-6xl">DocuBook Starter Templates</h1>
-      <p className="mb-10 sm:text-xl max-w-[800px] text-muted-foreground">
-        Get started by editing app/page.tsx . Save and see your changes instantly.{' '}
-        <Link className="text-primary underline" href="https://www.docubook.pro/docs/getting-started/introduction" target="_blank">
-          Read Documentations
-        </Link>
-      </p>
+    <div className="w-full max-w-[800px] pb-8">
+        <h1 className="mb-4 text-2xl font-bold sm:text-5xl">DocuBook Starter Templates</h1>
+        <p className="mb-8 sm:text-xl text-muted-foreground">
+            Get started by editing app/page.tsx . Save and see your changes instantly.{' '}
+            <Link className="text-primary underline" href="https://www.docubook.pro/docs/getting-started/introduction" target="_blank">
+            Read Documentations
+            </Link>
+        </p>
+    </div>
       <div className="flex flex-row items-center gap-6 mb-10">
         <Link
           href={`/docs${page_routes[0].href}`}
