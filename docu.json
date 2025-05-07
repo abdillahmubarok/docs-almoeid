@@ -1,10 +1,10 @@
 {
     "navbar": {
       "logo": {
-        "src": "/images/docu.svg",
-        "alt": "DocuBook Logo"
+        "src": "https://id.masjidalmubarokah.com/assets/images/logo/almoelogo.svg",
+        "alt": "ALMOE ID Logo"
       },
-      "logoText": "DocuBook",
+      "logoText": "ALMOE ID",
       "menu": [
         { "title": "Docs", "href": "/docs/getting-started/introduction" },
         { "title": "Changelog", "href": "/changelog" },
@@ -13,7 +13,7 @@
       ]
     },
     "footer": {
-      "copyright": "DocuBook",
+      "copyright": "ALMOE ID DOCS",
       "social": [
         {
             "name": "Gitlab",
@@ -43,9 +43,9 @@
       ]
     },
     "meta": {
-      "baseURL": "https://docubook.pro",
-      "title": "DocuBook",
-      "description": "DocuBook is a modern documentation platform for building, deploying, and managing your docs with ease.",
+      "baseURL": "https://docs.id.masjidalmubarokah.com",
+      "title": "ALMOE ID Docs",
+      "description": "ALMOE ID Documentation for Developers and Users  to get started with ALMOE ID.",
       "favicon": "/favicon.ico"
     },
     "repository": {

@@ -1,68 +1,99 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @import url("../styles/syntax.css");
 @import url("../styles/editor.css");
 
-/* ocean */
+/* green theme */
 @layer base {
-    :root {
-        --background: 210 60% 97%; /* Lighter sky blue */
-        --foreground: 220 30% 10%; /* Deep navy */
-        --card: 210 50% 99%; /* Almost white blue */
-        --card-foreground: 220 30% 10%;
-        --popover: 210 50% 99%;
-        --popover-foreground: 220 30% 10%;
-        --primary: 220 85% 55%; /* Vibrant azure blue */
-        --primary-foreground: 210 60% 97%;
-        --secondary: 220 40% 80%; /* Softer sky blue */
-        --secondary-foreground: 220 30% 10%;
-        --muted: 220 40% 80%;
-        --muted-foreground: 220 30% 30%; /* Deeper steel blue */
-        --accent: 200 75% 38%; /* Stronger ocean blue */
-        --accent-foreground: 0 0% 100%; /* Pure white */
-        --destructive: 0 70% 50%; /* More vivid red */
-        --destructive-foreground: 220 30% 95%; /* Lightened foreground */
-        --border: 220 20% 85%; /* Slightly darker grey-blue */
-        --input: 220 20% 85%;
-        --ring: 220 50% 50%; /* More noticeable blue ring */
-        --radius: 0.5rem;
-        --chart-1: 210 65% 45%; /* Classic blue */
-        --chart-2: 220 45% 60%; /* Softer sky */
-        --chart-3: 220 75% 45%; /* Azure blue */
-        --chart-4: 200 65% 50%; /* Ocean blue */
-        --chart-5: 240 35% 35%; /* Deeper teal */
-        --line-number-color: rgba(0, 0, 0, 0.05);
-    }
+  :root {
+    --background: 160 40% 97%;
+    /* Lighter mint green */
+    --foreground: 165 45% 10%;
+    /* Deep forest green */
+    --card: 160 35% 99%;
+    /* Almost white green */
+    --card-foreground: 165 45% 10%;
+    --popover: 160 35% 99%;
+    --popover-foreground: 165 45% 10%;
+    --primary: 162 80% 25%;
+    /* Vibrant teal green (#0E5C67) */
+    --primary-foreground: 160 40% 97%;
+    --secondary: 140 30% 80%;
+    /* Softer sage green */
+    --secondary-foreground: 165 45% 10%;
+    --muted: 140 30% 80%;
+    --muted-foreground: 150 40% 25%;
+    /* Deeper forest green */
+    --accent: 135 75% 22%;
+    /* Stronger forest green (#0e6730) */
+    --accent-foreground: 0 0% 100%;
+    /* Pure white */
+    --destructive: 0 70% 50%;
+    /* More vivid red */
+    --destructive-foreground: 165 40% 95%;
+    /* Lightened foreground */
+    --border: 150 20% 85%;
+    /* Slightly darker grey-green */
+    --input: 150 20% 85%;
+    --ring: 162 50% 35%;
+    /* More noticeable teal ring */
+    --radius: 0.5rem;
+    --chart-1: 162 65% 35%;
+    /* Teal green */
+    --chart-2: 140 45% 50%;
+    /* Softer mint */
+    --chart-3: 150 65% 35%;
+    /* Forest green */
+    --chart-4: 170 65% 35%;
+    /* Sea green */
+    --chart-5: 125 45% 35%;
+    /* Emerald green */
+    --line-number-color: rgba(0, 0, 0, 0.05);
+  }
 
-    .dark {
-        --background: 220 20% 8%; /* Deeper midnight navy */
-        --foreground: 220 85% 92%; /* Brighter sky blue */
-        --card: 220 20% 10%; /* Slightly darker midnight */
-        --card-foreground: 220 85% 92%;
-        --popover: 220 20% 10%;
-        --popover-foreground: 220 85% 92%;
-        --primary: 210 75% 65%; /* Softer but bright blue */
-        --primary-foreground: 220 20% 8%;
-        --secondary: 220 35% 12%; /* Darker steel blue */
-        --secondary-foreground: 220 85% 92%;
-        --muted: 220 35% 12%;
-        --muted-foreground: 210 25% 80%; /* Pale navy */
-        --accent: 220 85% 55%; /* Vibrant azure blue */
-        --accent-foreground: 220 85% 92%;
-        --destructive: 0 75% 50%; /* More noticeable red */
-        --destructive-foreground: 220 85% 92%;
-        --border: 220 35% 12%; /* Darker steel blue */
-        --input: 220 35% 12%;
-        --ring: 220 65% 55%; /* Vivid blue ring */
-        --chart-1: 210 65% 45%; /* Classic blue */
-        --chart-2: 220 45% 60%; /* Softer sky */
-        --chart-3: 220 75% 45%; /* Azure blue */
-        --chart-4: 200 65% 50%; /* Ocean blue */
-        --chart-5: 240 35% 35%; /* Deeper teal */
-        --line-number-color: rgba(255, 255, 255, 0.05);
-    }
+  .dark {
+    --background: 165 30% 8%;
+    /* Deeper midnight green */
+    --foreground: 150 45% 92%;
+    /* Brighter mint green */
+    --card: 165 30% 10%;
+    /* Slightly darker midnight green */
+    --card-foreground: 150 45% 92%;
+    --popover: 165 30% 10%;
+    --popover-foreground: 150 45% 92%;
+    --primary: 162 70% 30%;
+    /* Teal green (#0E5C67) variant */
+    --primary-foreground: 165 30% 8%;
+    --secondary: 155 35% 12%;
+    /* Darker jade green */
+    --secondary-foreground: 150 45% 92%;
+    --muted: 155 35% 12%;
+    --muted-foreground: 160 25% 80%;
+    /* Pale sage */
+    --accent: 135 75% 25%;
+    /* Vibrant forest green (#0e6730) */
+    --accent-foreground: 150 45% 92%;
+    --destructive: 0 75% 50%;
+    /* More noticeable red */
+    --destructive-foreground: 150 45% 92%;
+    --border: 155 35% 12%;
+    /* Darker jade green */
+    --input: 155 35% 12%;
+    --ring: 162 60% 35%;
+    /* Vivid teal ring */
+    --chart-1: 162 65% 35%;
+    /* Teal green */
+    --chart-2: 140 45% 50%;
+    /* Softer mint */
+    --chart-3: 150 65% 35%;
+    /* Forest green */
+    --chart-4: 170 65% 35%;
+    /* Sea green */
+    --chart-5: 125 45% 35%;
+    /* Emerald green */
+    --line-number-color: rgba(255, 255, 255, 0.05);
+  }
 }
 
 @layer base {
@@ -120,21 +151,23 @@ pre>code {
 }
 
 @layer utilities {
-    .animate-shine {
-      --animate-shine: shine var(--duration) infinite linear;
-      animation: var(--animate-shine);
-      background-size: 200% 200%;
+  .animate-shine {
+    --animate-shine: shine var(--duration) infinite linear;
+    animation: var(--animate-shine);
+    background-size: 200% 200%;
+  }
+
+  @keyframes shine {
+    0% {
+      background-position: 0% 0%;
     }
 
-    @keyframes shine {
-      0% {
-        background-position: 0% 0%;
-      }
-      50% {
-        background-position: 100% 100%;
-      }
-      100% {
-        background-position: 0% 0%;
-      }
+    50% {
+      background-position: 100% 100%;
+    }
+
+    100% {
+      background-position: 0% 0%;
     }
   }
+}

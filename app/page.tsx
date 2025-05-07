@@ -25,17 +25,17 @@ export default function Home() {
             )}
           >
             <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1 transition ease-out hover:text-neutral-100 hover:duration-300 hover:dark:text-neutral-200">
-              <span>🚀 New Version - Release v.1.8.0</span>
+              <span>🚀 Siap Satukan kKekuatan?</span>
               <ArrowRightIcon className="ml-1 size-3 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5" />
             </AnimatedShinyText>
           </div>
         </div>
       </Link>
     <div className="w-full max-w-[800px] pb-8">
-        <h1 className="mb-4 text-2xl font-bold sm:text-5xl">DocuBook Starter Templates</h1>
+        <h1 className="mb-4 text-2xl font-bold sm:text-5xl">Dokumentasi ALMOE ID</h1>
         <p className="mb-8 sm:text-xl text-muted-foreground">
-            Get started by editing app/page.tsx . Save and see your changes instantly.{' '}
-            <Link className="text-primary underline" href="https://www.docubook.pro/docs/getting-started/introduction" target="_blank">
+            Mulai integrasi dengan satu ekosistem Masji Al-Mubarokah melalui ALMOE ID.{' '}
+            <Link className="text-primary underline" href="/docs/getting-started/introduction" target="_blank">
             Read Documentations
             </Link>
         </p>
@@ -50,7 +50,7 @@ export default function Home() {
         >
           Get Started
         </Link>
-        <Link
+        {/* <Link
           href="/playground"
           className={buttonVariants({
             variant: "secondary",
@@ -59,17 +59,19 @@ export default function Home() {
           })}
         >
           Playground
-        </Link>
+        </Link> */}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-12">
         <Card className="px-2 py-6">
+          <Link href="#">
           <CardHeader className="flex flex-row justify-center items-center gap-3">
             <FileJson className="size-6 text-primary" />
-            <CardTitle className="text-xl">docu.json</CardTitle>
+            <CardTitle className="text-xl">Panduan Keamanan</CardTitle>
           </CardHeader>
           <CardContent>
-            <p>Edit the docu.json file to change the content in the header, footer and sidebar.</p>
+            <p>Panduan keamanan dari indikasi pencurian akunmu. Lindungi dengan rekomendasi-rekomendasi ini.</p>
           </CardContent>
+          </Link>
         </Card>
         <Card className="px-2 py-6">
           <CardHeader className="flex flex-row justify-center items-center gap-3">
